@@ -45,9 +45,10 @@ bool FaBo9Axis::begin() {
 bool FaBo9Axis::searchDevice() {
   uint8_t whoami;
   readI2c(_mpu9250addr, MPU9250_WHO_AM_I, 1, &whoami);
-  if(whoami == 0x71){
+  if(whoami == 0x71 || whoami == 0x73){
     return true;
   } else{
+   Serial.println(whoami,HEX); //giving the ID if not correct device found
     return false;
   }
 }
